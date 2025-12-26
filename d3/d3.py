@@ -1,12 +1,19 @@
 import sys
 
-def getJoltage(line):
-    lineLen = len(line)
-    firstDigitIndex = line.index(max(line[:(lineLen-1)]))
-    firstDigit = max(line[:(lineLen-1)])
-    lastDigitIndex = line.index(max(line[(firstDigitIndex+1):]))
-    lastDigit = max(line[(firstDigitIndex+1):])
-    return str(firstDigit) + str(lastDigit)
+def getJoltage(s):
+    digits = list(s)
+    remove = len(digits) - 12
+
+    while remove > 0:
+        for i in range(len(digits) - 1):
+            if digits[i] < digits[i + 1]:
+                del digits[i]
+                break
+        else:
+            digits.pop()
+        remove -= 1
+
+    return ''.join(digits)
 
 def parseLines():
     totalJoltage = 0
